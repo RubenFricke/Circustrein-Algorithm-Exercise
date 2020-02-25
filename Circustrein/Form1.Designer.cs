@@ -51,11 +51,9 @@
             // lstbxAnimals
             // 
             this.lstbxAnimals.FormattingEnabled = true;
-            this.lstbxAnimals.ItemHeight = 16;
-            this.lstbxAnimals.Location = new System.Drawing.Point(17, 16);
-            this.lstbxAnimals.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lstbxAnimals.Location = new System.Drawing.Point(13, 13);
             this.lstbxAnimals.Name = "lstbxAnimals";
-            this.lstbxAnimals.Size = new System.Drawing.Size(288, 516);
+            this.lstbxAnimals.Size = new System.Drawing.Size(217, 420);
             this.lstbxAnimals.TabIndex = 0;
             // 
             // grpbxAddAnimal
@@ -66,39 +64,34 @@
             this.grpbxAddAnimal.Controls.Add(this.btnRemove);
             this.grpbxAddAnimal.Controls.Add(this.grpbxEater);
             this.grpbxAddAnimal.Controls.Add(this.grpbxAnimalSize);
-            this.grpbxAddAnimal.Location = new System.Drawing.Point(316, 16);
-            this.grpbxAddAnimal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpbxAddAnimal.Location = new System.Drawing.Point(237, 13);
             this.grpbxAddAnimal.Name = "grpbxAddAnimal";
-            this.grpbxAddAnimal.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.grpbxAddAnimal.Size = new System.Drawing.Size(267, 517);
+            this.grpbxAddAnimal.Size = new System.Drawing.Size(200, 420);
             this.grpbxAddAnimal.TabIndex = 1;
             this.grpbxAddAnimal.TabStop = false;
             this.grpbxAddAnimal.Text = "Nieuw Dier Toevoegen";
             // 
             // btnOrder
             // 
-            this.btnOrder.Location = new System.Drawing.Point(9, 373);
-            this.btnOrder.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnOrder.Location = new System.Drawing.Point(7, 303);
             this.btnOrder.Name = "btnOrder";
-            this.btnOrder.Size = new System.Drawing.Size(250, 28);
+            this.btnOrder.Size = new System.Drawing.Size(188, 23);
             this.btnOrder.TabIndex = 9;
             this.btnOrder.Text = "Beste wagon combinatie";
             this.btnOrder.UseVisualStyleBackColor = true;
             // 
             // nmrcTotal
             // 
-            this.nmrcTotal.Location = new System.Drawing.Point(0, 283);
-            this.nmrcTotal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.nmrcTotal.Location = new System.Drawing.Point(0, 230);
             this.nmrcTotal.Name = "nmrcTotal";
-            this.nmrcTotal.Size = new System.Drawing.Size(259, 22);
+            this.nmrcTotal.Size = new System.Drawing.Size(194, 20);
             this.nmrcTotal.TabIndex = 8;
             // 
             // btnAddAnimal
             // 
-            this.btnAddAnimal.Location = new System.Drawing.Point(8, 336);
-            this.btnAddAnimal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAddAnimal.Location = new System.Drawing.Point(6, 273);
             this.btnAddAnimal.Name = "btnAddAnimal";
-            this.btnAddAnimal.Size = new System.Drawing.Size(123, 28);
+            this.btnAddAnimal.Size = new System.Drawing.Size(92, 23);
             this.btnAddAnimal.TabIndex = 7;
             this.btnAddAnimal.Text = "Voeg Toe";
             this.btnAddAnimal.UseVisualStyleBackColor = true;
@@ -106,10 +99,9 @@
             // 
             // btnRemove
             // 
-            this.btnRemove.Location = new System.Drawing.Point(136, 336);
-            this.btnRemove.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnRemove.Location = new System.Drawing.Point(102, 273);
             this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(123, 28);
+            this.btnRemove.Size = new System.Drawing.Size(92, 23);
             this.btnRemove.TabIndex = 6;
             this.btnRemove.Text = "Verwijderen";
             this.btnRemove.UseVisualStyleBackColor = true;
@@ -119,22 +111,19 @@
             // 
             this.grpbxEater.Controls.Add(this.rdbtnHerbivore);
             this.grpbxEater.Controls.Add(this.rdbtnMeatEater);
-            this.grpbxEater.Location = new System.Drawing.Point(9, 151);
-            this.grpbxEater.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpbxEater.Location = new System.Drawing.Point(7, 123);
             this.grpbxEater.Name = "grpbxEater";
-            this.grpbxEater.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.grpbxEater.Size = new System.Drawing.Size(249, 123);
+            this.grpbxEater.Size = new System.Drawing.Size(187, 100);
             this.grpbxEater.TabIndex = 4;
             this.grpbxEater.TabStop = false;
-            this.grpbxEater.Text = "....-eter";
+            this.grpbxEater.Text = "Eter";
             // 
             // rdbtnHerbivore
             // 
             this.rdbtnHerbivore.AutoSize = true;
-            this.rdbtnHerbivore.Location = new System.Drawing.Point(7, 54);
-            this.rdbtnHerbivore.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rdbtnHerbivore.Location = new System.Drawing.Point(5, 44);
             this.rdbtnHerbivore.Name = "rdbtnHerbivore";
-            this.rdbtnHerbivore.Size = new System.Drawing.Size(102, 21);
+            this.rdbtnHerbivore.Size = new System.Drawing.Size(91, 19);
             this.rdbtnHerbivore.TabIndex = 7;
             this.rdbtnHerbivore.TabStop = true;
             this.rdbtnHerbivore.Text = "Planteneter";
@@ -143,10 +132,9 @@
             // rdbtnMeatEater
             // 
             this.rdbtnMeatEater.AutoSize = true;
-            this.rdbtnMeatEater.Location = new System.Drawing.Point(7, 23);
-            this.rdbtnMeatEater.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rdbtnMeatEater.Location = new System.Drawing.Point(5, 19);
             this.rdbtnMeatEater.Name = "rdbtnMeatEater";
-            this.rdbtnMeatEater.Size = new System.Drawing.Size(89, 21);
+            this.rdbtnMeatEater.Size = new System.Drawing.Size(79, 19);
             this.rdbtnMeatEater.TabIndex = 6;
             this.rdbtnMeatEater.TabStop = true;
             this.rdbtnMeatEater.Text = "Vleeseter";
@@ -157,11 +145,9 @@
             this.grpbxAnimalSize.Controls.Add(this.rdbtnLarge);
             this.grpbxAnimalSize.Controls.Add(this.rdbtnMedium);
             this.grpbxAnimalSize.Controls.Add(this.rdbtnSmall);
-            this.grpbxAnimalSize.Location = new System.Drawing.Point(8, 23);
-            this.grpbxAnimalSize.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpbxAnimalSize.Location = new System.Drawing.Point(6, 19);
             this.grpbxAnimalSize.Name = "grpbxAnimalSize";
-            this.grpbxAnimalSize.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.grpbxAnimalSize.Size = new System.Drawing.Size(251, 119);
+            this.grpbxAnimalSize.Size = new System.Drawing.Size(188, 97);
             this.grpbxAnimalSize.TabIndex = 3;
             this.grpbxAnimalSize.TabStop = false;
             this.grpbxAnimalSize.Text = "Diergrootte";
@@ -169,10 +155,9 @@
             // rdbtnLarge
             // 
             this.rdbtnLarge.AutoSize = true;
-            this.rdbtnLarge.Location = new System.Drawing.Point(8, 85);
-            this.rdbtnLarge.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rdbtnLarge.Location = new System.Drawing.Point(6, 69);
             this.rdbtnLarge.Name = "rdbtnLarge";
-            this.rdbtnLarge.Size = new System.Drawing.Size(65, 21);
+            this.rdbtnLarge.Size = new System.Drawing.Size(58, 19);
             this.rdbtnLarge.TabIndex = 5;
             this.rdbtnLarge.TabStop = true;
             this.rdbtnLarge.Text = "Groot";
@@ -181,10 +166,9 @@
             // rdbtnMedium
             // 
             this.rdbtnMedium.AutoSize = true;
-            this.rdbtnMedium.Location = new System.Drawing.Point(8, 54);
-            this.rdbtnMedium.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rdbtnMedium.Location = new System.Drawing.Point(6, 44);
             this.rdbtnMedium.Name = "rdbtnMedium";
-            this.rdbtnMedium.Size = new System.Drawing.Size(97, 21);
+            this.rdbtnMedium.Size = new System.Drawing.Size(89, 19);
             this.rdbtnMedium.TabIndex = 4;
             this.rdbtnMedium.TabStop = true;
             this.rdbtnMedium.Text = "Gemiddeld";
@@ -193,10 +177,9 @@
             // rdbtnSmall
             // 
             this.rdbtnSmall.AutoSize = true;
-            this.rdbtnSmall.Location = new System.Drawing.Point(8, 23);
-            this.rdbtnSmall.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rdbtnSmall.Location = new System.Drawing.Point(6, 19);
             this.rdbtnSmall.Name = "rdbtnSmall";
-            this.rdbtnSmall.Size = new System.Drawing.Size(60, 21);
+            this.rdbtnSmall.Size = new System.Drawing.Size(56, 19);
             this.rdbtnSmall.TabIndex = 3;
             this.rdbtnSmall.TabStop = true;
             this.rdbtnSmall.Text = "Klein";
@@ -205,22 +188,20 @@
             // lstvwAnimalPairs
             // 
             this.lstvwAnimalPairs.HideSelection = false;
-            this.lstvwAnimalPairs.Location = new System.Drawing.Point(592, 16);
-            this.lstvwAnimalPairs.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lstvwAnimalPairs.Location = new System.Drawing.Point(444, 13);
             this.lstvwAnimalPairs.Name = "lstvwAnimalPairs";
-            this.lstvwAnimalPairs.Size = new System.Drawing.Size(292, 507);
+            this.lstvwAnimalPairs.Size = new System.Drawing.Size(220, 413);
             this.lstvwAnimalPairs.TabIndex = 2;
             this.lstvwAnimalPairs.UseCompatibleStateImageBehavior = false;
             // 
             // CircustreinForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(891, 554);
+            this.ClientSize = new System.Drawing.Size(668, 450);
             this.Controls.Add(this.lstvwAnimalPairs);
             this.Controls.Add(this.grpbxAddAnimal);
             this.Controls.Add(this.lstbxAnimals);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "CircustreinForm";
             this.Text = "Circustrein";
             this.grpbxAddAnimal.ResumeLayout(false);

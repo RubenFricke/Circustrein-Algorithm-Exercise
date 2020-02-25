@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using Circustrein.Enums;
 
 namespace Circustrein.Models
 {
@@ -9,7 +11,7 @@ namespace Circustrein.Models
 
         public IList<Animal> GetAllAnimals()
         {
-            IList<Animal> list = animals.AsReadOnly();
+            IList<Animal> list = animals.AsReadOnly(); 
             return list;
         }
 
@@ -21,6 +23,11 @@ namespace Circustrein.Models
         public void RemoveAnimal(Animal animal)
         {
             animals.Remove(animal);
+        }
+
+        private void calculateWagonDistribution()
+        {
+
         }
     }
 }
