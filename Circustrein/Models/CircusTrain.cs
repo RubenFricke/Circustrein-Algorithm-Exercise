@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Circustrein.Models
 {
@@ -12,7 +7,7 @@ namespace Circustrein.Models
         private List<Animal> animals = new List<Animal>();
         private List<Wagon> wagons = new List<Wagon>();
 
-        public IList<Animal> getAllAnimals()
+        public IList<Animal> GetAllAnimals()
         {
             IList<Animal> list = animals.AsReadOnly();
             return list;

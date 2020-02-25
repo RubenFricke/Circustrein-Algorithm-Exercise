@@ -1,9 +1,8 @@
-﻿
-namespace Circustrein.Enums
+﻿namespace Circustrein.Enums
 {
     enum AnimalEater
     {
-        herbivore,
-        meatEater
+        Herbivore,
+        MeatEater
     }
 }

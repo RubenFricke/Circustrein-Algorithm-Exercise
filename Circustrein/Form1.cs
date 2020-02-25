@@ -30,7 +30,7 @@ namespace Circustrein
         private void UpdateAnimalList()
         {
             lstbxAnimals.Items.Clear();
-            circusTrein.getAllAnimals()
+            circusTrein.GetAllAnimals()
                 .ToList()
                 .ForEach(x => lstbxAnimals.Items.Add(x));
         }
@@ -49,8 +49,8 @@ namespace Circustrein
                 return;
             }
 
-            if (rdbtnHerbivore.Checked) eater = AnimalEater.herbivore;
-            else if (rdbtnMeatEater.Checked) eater = AnimalEater.meatEater;
+            if (rdbtnHerbivore.Checked) eater = AnimalEater.Herbivore;
+            else if (rdbtnMeatEater.Checked) eater = AnimalEater.MeatEater;
             else
             {
                 MessageBox.Show("Vink wat het dier eet aan.");
@@ -60,7 +60,7 @@ namespace Circustrein
             for (int i = 0; i < total; i++)
             {
                 //gegevens van het dier nog meegeven voor het object
-                circusTrein.AddAnimal(new Animal());
+                circusTrein.AddAnimal(new Animal(size, eater));
             }
             UpdateAnimalList();
         }
