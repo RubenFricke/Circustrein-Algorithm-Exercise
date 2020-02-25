@@ -1,28 +1,41 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 using Circustrein.Enums;
+using Circustrein.Models;
 
 namespace Circustrein
 {
     public partial class CircustreinForm : Form
     {
+        private CircusTrain circusTrein;
         public CircustreinForm()
         {
+            circusTrein = new CircusTrain();
             InitializeComponent();
             lstbxAnimals.DisplayMember = "Name";
         }
 
         private void btnAddAnimal_Click(object sender, EventArgs e)
         {
-            addNewAnimal();
+            AddNewAnimal();
         }
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
-            //remove selected animal
+            circusTrein.RemoveAnimal((Animal)lstbxAnimals.SelectedItem);
+            UpdateAnimalList();
         }
 
-        private void addNewAnimal()
+        private void UpdateAnimalList()
+        {
+            lstbxAnimals.Items.Clear();
+            circusTrein.getAllAnimals()
+                .ToList()
+                .ForEach(x => lstbxAnimals.Items.Add(x));
+        }
+
+        private void AddNewAnimal()
         {
             AnimalSize size;
             AnimalEater eater;
@@ -46,9 +59,10 @@ namespace Circustrein
 
             for (int i = 0; i < total; i++)
             {
-                //add animal
+                //gegevens van het dier nog meegeven voor het object
+                circusTrein.AddAnimal(new Animal());
             }
-
+            UpdateAnimalList();
         }
     }
 }
