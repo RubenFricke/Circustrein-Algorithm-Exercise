@@ -20,8 +20,20 @@ namespace Circustrein.Models
         {
             animals.Add(animal);
             points += animal.GetPoints();
+            isFull = CheckFull();
             isFull = points >= maxPoints;
             hasMeatEater = animal.GetEater() == AnimalEater.MeatEater;
+        }
+        //check volheid, dus nog kijken naar medium vleeseter, kan dus alleen grote planteneter -> na 8 punten zie ie vol
+        //zelfde met kleine vleeseter
+        //misschien iets van formule voor te bedenken
+        private bool CheckFull()
+        {
+            if (points >= maxPoints) return true;
+            else if (animals.Count(x => x.GetEater() == AnimalEater.MeatEater && x.GetSize() == AnimalSize.Large) >= 1)
+                return true;
+            //else if()
+            return false;
         }
 
         public int GetPoints()
@@ -39,9 +51,10 @@ namespace Circustrein.Models
             return isFull;
         }
 
-        public List<Animal> GetAnimals()
+        public IList<Animal> GetAnimals()
         {
-            return animals;
+            IList<Animal> list = animals.AsReadOnly();
+            return list;
         }
     }
 }

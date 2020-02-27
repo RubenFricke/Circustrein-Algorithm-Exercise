@@ -64,5 +64,24 @@ namespace Circustrein
             }
             UpdateAnimalList();
         }
+
+        private void btnWagonCombination_Click(object sender, EventArgs e)
+        {
+            lstvwAnimalPairs.Clear();
+            if (circusTrein.GetWagons().Count > 0)
+            {
+                int total = 0;
+                foreach (var wagon in circusTrein.GetWagons())
+                {
+                    total++;
+                    ListViewGroup lstvwgrp = new ListViewGroup("Wagon " + total, HorizontalAlignment.Left);
+                    wagon.GetAnimals().ToList().ForEach(animal =>
+                        lstvwAnimalPairs.Items.Add(new ListViewItem(animal.Name, lstvwgrp)));
+
+                    lstvwAnimalPairs.Groups.Add(lstvwgrp);
+                }
+            }
+            else MessageBox.Show("Voeg eerst dieren toe voordat de optimale combinatie berekend kan worden.");
+        }
     }
 }

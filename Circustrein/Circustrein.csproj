@@ -57,6 +57,7 @@
     <Compile Include="Models\Animal.cs" />
     <Compile Include="Models\CircusTrain.cs" />
     <Compile Include="Models\Wagon.cs" />
+    <Compile Include="Models\WagonDepartment.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">

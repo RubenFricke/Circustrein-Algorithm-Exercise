@@ -6,8 +6,8 @@ namespace Circustrein.Models
 {
     class CircusTrain
     {
+        WagonDepartment wagonDepartment = new WagonDepartment();
         private List<Animal> animals = new List<Animal>();
-        private List<Wagon> wagons = new List<Wagon>();
 
         public IList<Animal> GetAllAnimals()
         {
@@ -25,9 +25,9 @@ namespace Circustrein.Models
             animals.Remove(animal);
         }
 
-        private void calculateWagonDistribution()
+        public List<Wagon> GetWagons()
         {
-
+            return wagonDepartment.GetBestWagonDistribution(animals);
         }
     }
 }
