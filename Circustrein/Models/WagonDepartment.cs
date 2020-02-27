@@ -29,6 +29,19 @@ namespace Circustrein.Models
                     notDistributedAnimals.Remove(animal);
                     AddNewWagon(animal);
                 });
+
+            notDistributedAnimals
+                .OrderByDescending(a => a.GetSize())
+                .ToList()
+                .ForEach(animal =>
+                {
+                    var wagon = wagons                        
+                        .FirstOrDefault(w => w.HasSpaceFor(animal.GetSize()) && (int) animal.GetSize() > (int) w.GetMeatEaterSize());
+                    if (wagon != null)
+                    {
+                        wagon.AddAnimal(animal);
+                    }else AddNewWagon(animal);
+                });
         }
 
         private void AddNewWagon(Animal animal)

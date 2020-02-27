@@ -9,46 +9,49 @@ namespace Circustrein.Models
 {
     class Wagon
     {
-        private const int maxPoints = 10;
+        //private const int maxPoints = 10;
 
         private bool hasMeatEater = false;
+        private AnimalSize meatEaterSize;
         private int points = 0;
-        private bool isFull = false;
+        //private bool isFull = false;
         List<Animal> animals = new List<Animal>();
 
         public void AddAnimal(Animal animal)
         {
             animals.Add(animal);
             points += animal.GetPoints();
-            isFull = CheckFull();
-            isFull = points >= maxPoints;
-            hasMeatEater = animal.GetEater() == AnimalEater.MeatEater;
+            //isFull = CheckFull();
+            //isFull = points >= maxPoints;
+            if (animal.GetEater() == AnimalEater.MeatEater)
+            {
+                hasMeatEater = true; meatEaterSize = animal.GetSize();
+            }
         }
-        //check volheid, dus nog kijken naar medium vleeseter, kan dus alleen grote planteneter -> na 8 punten zie ie vol
-        //zelfde met kleine vleeseter
-        //misschien iets van formule voor te bedenken
-        private bool CheckFull()
+
+        //private bool CheckFull()
+        //{
+        //    if (points >= maxPoints) return true;
+        //    else if (animals.Count(x => x.GetEater() == AnimalEater.MeatEater && x.GetSize() == AnimalSize.Large) >= 1)
+        //        return true;
+        //    //else if()
+        //    return false;
+        //}
+
+        //public int GetPoints()
+        //{
+        //    return points;
+        //}
+
+        public bool HasSpaceFor(AnimalSize size)
         {
-            if (points >= maxPoints) return true;
-            else if (animals.Count(x => x.GetEater() == AnimalEater.MeatEater && x.GetSize() == AnimalSize.Large) >= 1)
-                return true;
-            //else if()
+            if (points + (int) size <= 10) return true;
             return false;
         }
 
-        public int GetPoints()
+        public AnimalSize GetMeatEaterSize()
         {
-            return points;
-        }
-
-        public bool HasMeatEater()
-        {
-            return hasMeatEater;
-        }
-
-        public bool IsFull()
-        {
-            return isFull;
+            return meatEaterSize;
         }
 
         public IList<Animal> GetAnimals()
