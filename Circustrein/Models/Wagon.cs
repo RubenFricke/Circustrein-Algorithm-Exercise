@@ -17,14 +17,11 @@ namespace Circustrein.Models
         private bool isFull = false;
         List<Animal> animals = new List<Animal>();
 
-        public Wagon()
-        {
-
-        }
+        public Wagon() { }
 
         public Wagon(Animal animal)
         {
-            animals.Add(animal);
+            AddAnimal(animal);
         }
 
         public Wagon(List<Animal> animals)
@@ -35,12 +32,17 @@ namespace Circustrein.Models
         public void AddAnimal(Animal animal)
         {
             animals.Add(animal);
-            points += animal.GetPoints();
-            //isFull = points >= maxPoints;
             if (animal.GetEater() == AnimalEater.MeatEater)
             {
-                hasMeatEater = true; meatEaterSize = animal.GetSize();
+                hasMeatEater = true;
+                meatEaterSize = animal.GetSize();
             }
+            UpdateStats();
+        }
+
+        private void UpdateStats()
+        {
+            points = animals.Sum(a => a.GetPoints());
             isFull = CheckFull();
         }
 
@@ -58,10 +60,10 @@ namespace Circustrein.Models
 
         public Animal SwitchAnimal(Animal animal)
         {
-            var anim = animals.OrderBy(a => a.GetSize()).FirstOrDefault();
+            var anim = animals.OrderBy(a => a.GetSize()).FirstOrDefault(a => a.GetEater() == AnimalEater.Herbivore);
             animals.Remove(anim);
             animals.Add(animal);
-
+            UpdateStats();
             return anim;
         }
 

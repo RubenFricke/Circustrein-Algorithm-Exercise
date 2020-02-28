@@ -35,10 +35,10 @@ namespace Circustrein.Models
                 .ToList()
                 .ForEach(wagon =>
                 {
-                    while (wagon.isWagonFull() == false && notDistributedAnimals.Count(a => (int)a.GetSize() > (int)wagon.GetMeatEaterSize()) != 0)
+                    while (wagon.isWagonFull() == false && notDistributedAnimals.OrderByDescending(a => a.GetSize()).Count(a => (int)a.GetSize() > (int)wagon.GetMeatEaterSize()) != 0)
                     {
                         var animal = notDistributedAnimals.OrderByDescending(a=>a.GetSize()).Where(a => (int)a.GetSize() > (int)wagon.GetMeatEaterSize()).OrderBy(a => a.GetSize()).FirstOrDefault();
-                        if ((int) wagon.GetMeatEaterSize() < (int) animal.GetSize() &&
+                        if ((int) wagon.GetMeatEaterSize() < (int) animal.GetSize() &&/////////////////////hier naar kijken
                             wagon.GetPoints() + animal.GetPoints() <= 10)
                         {
                             notDistributedAnimals.Remove(animal);
@@ -49,7 +49,7 @@ namespace Circustrein.Models
 
                     if (wagon.GetMeatEaterSize() == AnimalSize.Small && wagon.GetPoints() <= 7)
                     {
-                        var animal = notDistributedAnimals.FirstOrDefault(a => a.GetSize() == AnimalSize.Large);
+                        var animal = notDistributedAnimals.FirstOrDefault(a => a.GetSize() == AnimalSize.Large && a.GetEater()==AnimalEater.Herbivore);
                         if (animal != null)
                         {
                             notDistributedAnimals.Remove(animal);
