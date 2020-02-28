@@ -2,7 +2,7 @@
 
 namespace Circustrein.Models
 {
-    class Animal
+    public class Animal
     {
         private AnimalSize size;
         private AnimalEater eater;

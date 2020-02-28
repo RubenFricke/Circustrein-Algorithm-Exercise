@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms.VisualStyles;
 using Circustrein.Enums;
 
 namespace Circustrein.Models
 {
-    class CircusTrain
+    public class CircusTrain
     {
         WagonDepartment wagonDepartment = new WagonDepartment();
         private List<Animal> animals = new List<Animal>();
@@ -28,6 +29,11 @@ namespace Circustrein.Models
         public List<Wagon> GetWagons()
         {
             return wagonDepartment.GetBestWagonDistribution(animals);
+        }
+
+        public List<Wagon> GetWagons(List<Animal> animalList)
+        {
+            return wagonDepartment.GetBestWagonDistribution(animalList);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Circustrein.Enums
 {
-    enum AnimalEater
+    public enum AnimalEater
     {
         Herbivore,
         MeatEater

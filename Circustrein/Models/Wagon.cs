@@ -7,7 +7,7 @@ using Circustrein.Enums;
 
 namespace Circustrein.Models
 {
-    class Wagon
+    public class Wagon
     {
         //private const int maxPoints = 10;
 
@@ -16,6 +16,21 @@ namespace Circustrein.Models
         private int points = 0;
         private bool isFull = false;
         List<Animal> animals = new List<Animal>();
+
+        public Wagon()
+        {
+
+        }
+
+        public Wagon(Animal animal)
+        {
+            animals.Add(animal);
+        }
+
+        public Wagon(List<Animal> animals)
+        {
+            animals.ForEach(this.animals.Add);
+        }
 
         public void AddAnimal(Animal animal)
         {
@@ -49,15 +64,6 @@ namespace Circustrein.Models
 
             return anim;
         }
-
-        //private bool CheckFull()
-        //{
-        //    if (points >= maxPoints) return true;
-        //    else if (animals.Count(x => x.GetEater() == AnimalEater.MeatEater && x.GetSize() == AnimalSize.Large) >= 1)
-        //        return true;
-        //    //else if()
-        //    return false;
-        //}
 
         public int GetPoints()
         {

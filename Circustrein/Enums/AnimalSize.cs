@@ -1,6 +1,6 @@
 ﻿namespace Circustrein.Enums
 {
-    enum AnimalSize
+    public enum AnimalSize
     {
         Small=1,
         Medium=3,

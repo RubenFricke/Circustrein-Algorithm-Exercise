@@ -4,7 +4,7 @@ using Circustrein.Enums;
 
 namespace Circustrein.Models
 {
-    class WagonDepartment
+    public class WagonDepartment
     {
         private List<Wagon> wagons = new List<Wagon>();
         private List<Animal> notDistributedAnimals;
@@ -38,11 +38,13 @@ namespace Circustrein.Models
                     while (wagon.isWagonFull() == false && notDistributedAnimals.Count(a => (int)a.GetSize() > (int)wagon.GetMeatEaterSize()) != 0)
                     {
                         var animal = notDistributedAnimals.Where(a => (int)a.GetSize() > (int)wagon.GetMeatEaterSize()).OrderBy(a => a.GetSize()).FirstOrDefault();
-                        if ((int) wagon.GetMeatEaterSize() < (int) animal.GetSize())
+                        if ((int) wagon.GetMeatEaterSize() < (int) animal.GetSize() &&
+                            wagon.GetPoints() + animal.GetPoints() <= 10)
                         {
                             notDistributedAnimals.Remove(animal);
                             wagon.AddAnimal(animal);
                         }
+                        else break;
                     }
 
                     if (wagon.GetMeatEaterSize() == AnimalSize.Small && wagon.GetPoints() <= 7)
