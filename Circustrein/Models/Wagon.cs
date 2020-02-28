@@ -14,19 +14,40 @@ namespace Circustrein.Models
         private bool hasMeatEater = false;
         private AnimalSize meatEaterSize;
         private int points = 0;
-        //private bool isFull = false;
+        private bool isFull = false;
         List<Animal> animals = new List<Animal>();
 
         public void AddAnimal(Animal animal)
         {
             animals.Add(animal);
             points += animal.GetPoints();
-            //isFull = CheckFull();
             //isFull = points >= maxPoints;
             if (animal.GetEater() == AnimalEater.MeatEater)
             {
                 hasMeatEater = true; meatEaterSize = animal.GetSize();
             }
+            isFull = CheckFull();
+        }
+
+        private bool CheckFull()
+        {
+            if (hasMeatEater)
+            {
+                if (GetMeatEaterSize() == AnimalSize.Large) return true;
+                else if (GetMeatEaterSize() == AnimalSize.Medium && points >= 8) return true;
+                else if (GetMeatEaterSize() == AnimalSize.Small && points >= 9) return true;
+            }
+            else if (points >= 10) return true;
+            return false;
+        }
+
+        public Animal SwitchAnimal(Animal animal)
+        {
+            var anim = animals.OrderBy(a => a.GetSize()).FirstOrDefault();
+            animals.Remove(anim);
+            animals.Add(animal);
+
+            return anim;
         }
 
         //private bool CheckFull()
@@ -38,11 +59,11 @@ namespace Circustrein.Models
         //    return false;
         //}
 
-        //public int GetPoints()
-        //{
-        //    return points;
-        //}
-
+        public int GetPoints()
+        {
+            return points;
+        }
+        
         public bool HasSpaceFor(AnimalSize size)
         {
             if (points + (int) size <= 10) return true;
@@ -58,6 +79,11 @@ namespace Circustrein.Models
         {
             IList<Animal> list = animals.AsReadOnly();
             return list;
+        }
+
+        public bool isWagonFull()
+        {
+            return isFull;
         }
     }
 }

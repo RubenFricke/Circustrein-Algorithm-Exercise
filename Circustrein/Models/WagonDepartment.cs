@@ -7,11 +7,11 @@ namespace Circustrein.Models
     class WagonDepartment
     {
         private List<Wagon> wagons = new List<Wagon>();
-        private List<Animal> notDistributedAnimals = new List<Animal>();
+        private List<Animal> notDistributedAnimals;
 
         public List<Wagon> GetBestWagonDistribution(List<Animal> animals)
         {
-            this.notDistributedAnimals = new List<Animal>(animals);
+            notDistributedAnimals = new List<Animal>(animals);
             wagons.Clear();
 
             CalculateWagonDistribution();
@@ -30,18 +30,48 @@ namespace Circustrein.Models
                     AddNewWagon(animal);
                 });
 
-            notDistributedAnimals
-                .OrderByDescending(a => a.GetSize())
+            wagons
+                .Where(wagon => wagon.isWagonFull() == false)
                 .ToList()
-                .ForEach(animal =>
+                .ForEach(wagon =>
                 {
-                    var wagon = wagons                        
-                        .FirstOrDefault(w => w.HasSpaceFor(animal.GetSize()) && (int) animal.GetSize() > (int) w.GetMeatEaterSize());
-                    if (wagon != null)
+                    while (wagon.isWagonFull() == false && notDistributedAnimals.Count(a => (int)a.GetSize() > (int)wagon.GetMeatEaterSize()) != 0)
                     {
-                        wagon.AddAnimal(animal);
-                    }else AddNewWagon(animal);
+                        var animal = notDistributedAnimals.Where(a => (int)a.GetSize() > (int)wagon.GetMeatEaterSize()).OrderBy(a => a.GetSize()).FirstOrDefault();
+                        if ((int) wagon.GetMeatEaterSize() < (int) animal.GetSize())
+                        {
+                            notDistributedAnimals.Remove(animal);
+                            wagon.AddAnimal(animal);
+                        }
+                    }
+
+                    if (wagon.GetMeatEaterSize() == AnimalSize.Small && wagon.GetPoints() <= 7)
+                    {
+                        var animal = notDistributedAnimals.FirstOrDefault(a => a.GetSize() == AnimalSize.Medium);
+                        if (animal != null)
+                        {
+                            notDistributedAnimals.Remove(animal);
+                            notDistributedAnimals.Add(wagon.SwitchAnimal(animal));
+                        }
+                    }
                 });
+
+            Enumerable.Range(0, notDistributedAnimals.Count)
+                .ToList()
+                .ForEach(i => AddToWagonWithRoom(notDistributedAnimals[0]));
+        }
+
+        private void AddToWagonWithRoom(Animal animal)
+        {
+            var wagon = wagons
+                .FirstOrDefault(w => w.HasSpaceFor(animal.GetSize()) && (int)animal.GetSize() > (int)w.GetMeatEaterSize());
+            if (wagon != null)
+            {
+                wagon.AddAnimal(animal);
+            }
+            else AddNewWagon(animal);
+
+            notDistributedAnimals.Remove(animal);
         }
 
         private void AddNewWagon(Animal animal)
