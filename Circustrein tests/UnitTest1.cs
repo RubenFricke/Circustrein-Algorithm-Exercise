@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using Circustrein;
 using Circustrein.Enums;
@@ -9,55 +10,71 @@ namespace Circustrein_tests
     [TestFixture]
     public class Tests
     {
-        CircusTrain circusTrain = new CircusTrain();
+        readonly CircusTrain circusTrain = new CircusTrain();
 
         [Test]
-        public void EasyTests()
+        public void EasyTestsWagonCount()
         {
-            Assert.AreEqual(new List<Wagon>()
-            {
-                new Wagon(new Animal(AnimalSize.Large, AnimalEater.MeatEater)),
-                new Wagon(new Animal(AnimalSize.Large, AnimalEater.MeatEater))
-            },circusTrain.GetWagons(new List<Animal>()
+            Assert.AreEqual(3, circusTrain.GetWagons(new List<Animal>()
             {
                 new Animal(AnimalSize.Large, AnimalEater.MeatEater),
-                new Animal(AnimalSize.Large, AnimalEater.MeatEater)
-            }));
+                new Animal(AnimalSize.Large, AnimalEater.MeatEater),
+                new Animal(AnimalSize.Medium, AnimalEater.Herbivore),
+            }).Count);
+
+            Assert.AreEqual(3, circusTrain.GetWagons(new List<Animal>()
+            {
+                new Animal(AnimalSize.Small, AnimalEater.MeatEater),
+                new Animal(AnimalSize.Small, AnimalEater.MeatEater),
+                new Animal(AnimalSize.Small, AnimalEater.Herbivore),
+                new Animal(AnimalSize.Large, AnimalEater.Herbivore),
+                new Animal(AnimalSize.Large, AnimalEater.Herbivore),
+            }).Count);
+
+            Assert.AreEqual(4, circusTrain.GetWagons(new List<Animal>()
+            {
+                new Animal(AnimalSize.Large, AnimalEater.MeatEater),
+                new Animal(AnimalSize.Large, AnimalEater.MeatEater),
+                new Animal(AnimalSize.Large, AnimalEater.MeatEater),
+                new Animal(AnimalSize.Large, AnimalEater.Herbivore),
+                new Animal(AnimalSize.Large, AnimalEater.Herbivore),
+            }).Count);
         }
 
         [Test]
-        public void HardTest()
+        public void HardTestWagonCount()
         {
-            Assert.AreEqual(new List<Wagon>()
-                {
-                    new Wagon(new Animal(AnimalSize.Large, AnimalEater.MeatEater)),
-                    new Wagon(new Animal(AnimalSize.Large, AnimalEater.MeatEater)),
-                    new Wagon(new List<Animal>(){new Animal(AnimalSize.Medium, AnimalEater.MeatEater), new Animal(AnimalSize.Large, AnimalEater.Herbivore)}),
-                    new Wagon(new List<Animal>(){new Animal(AnimalSize.Small, AnimalEater.MeatEater), new Animal(AnimalSize.Medium, AnimalEater.Herbivore),new Animal(AnimalSize.Medium, AnimalEater.Herbivore),new Animal(AnimalSize.Medium, AnimalEater.Herbivore)}),
-                    new Wagon(new List<Animal>(){new Animal(AnimalSize.Small, AnimalEater.MeatEater), new Animal(AnimalSize.Medium, AnimalEater.Herbivore),new Animal(AnimalSize.Medium, AnimalEater.Herbivore),new Animal(AnimalSize.Large, AnimalEater.Herbivore)}),
-                    new Wagon(new List<Animal>(){new Animal(AnimalSize.Large,AnimalEater.Herbivore),new Animal(AnimalSize.Large,AnimalEater.Herbivore)}),
-                    new Wagon(new List<Animal>(){new Animal(AnimalSize.Large,AnimalEater.Herbivore),new Animal(AnimalSize.Small,AnimalEater.Herbivore),new Animal(AnimalSize.Small,AnimalEater.Herbivore)})
-                },
-                circusTrain.GetWagons(new List<Animal>()
+            Assert.AreEqual(7, circusTrain.GetWagons(new List<Animal>()
             {
-                new Animal(AnimalSize.Large,AnimalEater.MeatEater),
-                new Animal(AnimalSize.Large,AnimalEater.MeatEater),
-                new Animal(AnimalSize.Medium,AnimalEater.MeatEater),
-                new Animal(AnimalSize.Small,AnimalEater.MeatEater),
-                new Animal(AnimalSize.Small,AnimalEater.MeatEater),
-                new Animal(AnimalSize.Large,AnimalEater.Herbivore),
-                new Animal(AnimalSize.Large,AnimalEater.Herbivore),
-                new Animal(AnimalSize.Large,AnimalEater.Herbivore),
-                new Animal(AnimalSize.Large,AnimalEater.Herbivore),
-                new Animal(AnimalSize.Large,AnimalEater.Herbivore),
-                new Animal(AnimalSize.Medium,AnimalEater.Herbivore),
-                new Animal(AnimalSize.Medium,AnimalEater.Herbivore),
-                new Animal(AnimalSize.Medium,AnimalEater.Herbivore),
-                new Animal(AnimalSize.Medium,AnimalEater.Herbivore),
-                new Animal(AnimalSize.Medium,AnimalEater.Herbivore),
-                new Animal(AnimalSize.Large,AnimalEater.Herbivore),
-                new Animal(AnimalSize.Large,AnimalEater.Herbivore)
-            }));
+                new Animal(AnimalSize.Large, AnimalEater.MeatEater),
+                new Animal(AnimalSize.Large, AnimalEater.MeatEater),
+                new Animal(AnimalSize.Medium, AnimalEater.MeatEater),
+                new Animal(AnimalSize.Small, AnimalEater.MeatEater),
+                new Animal(AnimalSize.Small, AnimalEater.MeatEater),
+                new Animal(AnimalSize.Large, AnimalEater.Herbivore),
+                new Animal(AnimalSize.Large, AnimalEater.Herbivore),
+                new Animal(AnimalSize.Large, AnimalEater.Herbivore),
+                new Animal(AnimalSize.Large, AnimalEater.Herbivore),
+                new Animal(AnimalSize.Large, AnimalEater.Herbivore),
+                new Animal(AnimalSize.Medium, AnimalEater.Herbivore),
+                new Animal(AnimalSize.Medium, AnimalEater.Herbivore),
+                new Animal(AnimalSize.Medium, AnimalEater.Herbivore),
+                new Animal(AnimalSize.Medium, AnimalEater.Herbivore),
+                new Animal(AnimalSize.Medium, AnimalEater.Herbivore),
+                new Animal(AnimalSize.Small, AnimalEater.Herbivore),
+                new Animal(AnimalSize.Small, AnimalEater.Herbivore)
+            }).Count);
+        }
+
+        [Test]
+        public void AnimalPresenceCheck()
+        {
+            Assert.AreEqual(3, circusTrain.GetWagons(new List<Animal>()
+            {
+                new Animal(AnimalSize.Large, AnimalEater.MeatEater),
+                new Animal(AnimalSize.Large, AnimalEater.MeatEater),
+                new Animal(AnimalSize.Medium, AnimalEater.Herbivore),
+            });
         }
     }
 }

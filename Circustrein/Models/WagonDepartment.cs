@@ -6,6 +6,9 @@ namespace Circustrein.Models
 {
     public class WagonDepartment
     {
+        /// <summary>
+        /// Hier nog alle magic numbers vervangen door variabelen die veranderd kunnen worden.
+        /// </summary>
         private List<Wagon> wagons = new List<Wagon>();
         private List<Animal> notDistributedAnimals;
 
@@ -31,14 +34,14 @@ namespace Circustrein.Models
                 });
 
             wagons
-                .Where(wagon => wagon.isWagonFull() == false)
+                .Where(wagon => wagon.IsWagonFull() == false)
                 .ToList()
                 .ForEach(wagon =>
                 {
-                    while (wagon.isWagonFull() == false && notDistributedAnimals.OrderByDescending(a => a.GetSize()).Count(a => (int)a.GetSize() > (int)wagon.GetMeatEaterSize()) != 0)
+                    while (wagon.IsWagonFull() == false && notDistributedAnimals.OrderByDescending(a => a.GetSize()).Count(a => (int)a.GetSize() > (int)wagon.GetMeatEaterSize()) != 0)
                     {
-                        var animal = notDistributedAnimals.OrderByDescending(a=>a.GetSize()).Where(a => (int)a.GetSize() > (int)wagon.GetMeatEaterSize()).OrderBy(a => a.GetSize()).FirstOrDefault();
-                        if ((int) wagon.GetMeatEaterSize() < (int) animal.GetSize() &&/////////////////////hier naar kijken
+                        var animal = notDistributedAnimals.OrderByDescending(a => a.GetSize()).Where(a => (int)a.GetSize() > (int)wagon.GetMeatEaterSize()).OrderBy(a => a.GetSize()).FirstOrDefault();
+                        if ((int)wagon.GetMeatEaterSize() < (int)animal.GetSize() &&
                             wagon.GetPoints() + animal.GetPoints() <= 10)
                         {
                             notDistributedAnimals.Remove(animal);
@@ -49,7 +52,7 @@ namespace Circustrein.Models
 
                     if (wagon.GetMeatEaterSize() == AnimalSize.Small && wagon.GetPoints() <= 7)
                     {
-                        var animal = notDistributedAnimals.FirstOrDefault(a => a.GetSize() == AnimalSize.Large && a.GetEater()==AnimalEater.Herbivore);
+                        var animal = notDistributedAnimals.FirstOrDefault(a => a.GetSize() == AnimalSize.Large && a.GetEater() == AnimalEater.Herbivore);
                         if (animal != null)
                         {
                             notDistributedAnimals.Remove(animal);

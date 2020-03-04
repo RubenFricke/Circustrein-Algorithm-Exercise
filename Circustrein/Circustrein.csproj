@@ -56,6 +56,7 @@
     </Compile>
     <Compile Include="Models\Animal.cs" />
     <Compile Include="Models\CircusTrain.cs" />
+    <Compile Include="Models\MeatEaterInfo.cs" />
     <Compile Include="Models\Wagon.cs" />
     <Compile Include="Models\WagonDepartment.cs" />
     <Compile Include="Program.cs" />

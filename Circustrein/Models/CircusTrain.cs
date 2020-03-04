@@ -8,6 +8,12 @@ namespace Circustrein.Models
     public class CircusTrain
     {
         WagonDepartment wagonDepartment = new WagonDepartment();
+
+        //dubbele lijst hier weghalen en dit in de form laten, dus dat hier alleen berekend 
+        //wordt naar de optimale combinatie
+
+        //wel de get all animals houden zodat met unit tests gebruikt kan worden
+        // dus dit krijg je vanuit alle animals uit de verdeelde wagons
         private List<Animal> animals = new List<Animal>();
 
         public IList<Animal> GetAllAnimals()

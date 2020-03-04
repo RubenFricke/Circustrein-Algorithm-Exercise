@@ -1,18 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Circustrein.Enums;
 
 namespace Circustrein.Models
 {
     public class Wagon
     {
-        //private const int maxPoints = 10;
+        private const int maxPoints = 10;
 
-        private bool hasMeatEater = false;
-        private AnimalSize meatEaterSize;
+        MeatEaterInfo meatEaterInfo = new MeatEaterInfo(); 
+        
+        //struct maken? 
+        //https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/choosing-between-class-and-struct
+        //private bool hasMeatEater = false;
+        
+        //private AnimalSize meatEaterSize;
         private int points = 0;
         private bool isFull = false;
         List<Animal> animals = new List<Animal>();
@@ -21,6 +23,7 @@ namespace Circustrein.Models
 
         public Wagon(Animal animal)
         {
+            //i/*nt.TryParse()*/
             AddAnimal(animal);
         }
 
@@ -34,8 +37,9 @@ namespace Circustrein.Models
             animals.Add(animal);
             if (animal.GetEater() == AnimalEater.MeatEater)
             {
-                hasMeatEater = true;
-                meatEaterSize = animal.GetSize();
+                meatEaterInfo.SetMeatEaterSize(animal.GetSize());
+                //hasMeatEater = true;
+                //meatEaterSize = animal.GetSize();
             }
             UpdateStats();
         }
@@ -48,13 +52,13 @@ namespace Circustrein.Models
 
         private bool CheckFull()
         {
-            if (hasMeatEater)
+            if (/*hasMeatEater*/meatEaterInfo.HasMeatEater())
             {
-                if (GetMeatEaterSize() == AnimalSize.Large) return true;
-                else if (GetMeatEaterSize() == AnimalSize.Medium && points >= 8) return true;
-                else if (GetMeatEaterSize() == AnimalSize.Small && points >= 9) return true;
+                if (/*GetMeatEaterSize()*/meatEaterInfo.GetMeatEaterSize() == AnimalSize.Large) return true;
+                else if (meatEaterInfo.GetMeatEaterSize() == AnimalSize.Medium && points >= maxPoints - (int)meatEaterInfo.GetMeatEaterSize()) return true;
+                else if (meatEaterInfo.GetMeatEaterSize() == AnimalSize.Small && points >= maxPoints - (int) meatEaterInfo.GetMeatEaterSize()) return true;
             }
-            else if (points >= 10) return true;
+            else if (points >= maxPoints) return true;
             return false;
         }
 
@@ -74,13 +78,12 @@ namespace Circustrein.Models
         
         public bool HasSpaceFor(AnimalSize size)
         {
-            if (points + (int) size <= 10) return true;
-            return false;
+            return points + (int) size <= maxPoints;
         }
 
         public AnimalSize GetMeatEaterSize()
         {
-            return meatEaterSize;
+            return meatEaterInfo.GetMeatEaterSize();
         }
 
         public IList<Animal> GetAnimals()
@@ -89,7 +92,7 @@ namespace Circustrein.Models
             return list;
         }
 
-        public bool isWagonFull()
+        public bool IsWagonFull()
         {
             return isFull;
         }
