@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using Circustrein.Enums;
 using Circustrein.Models;
-
+using Newtonsoft.Json;
 namespace Circustrein
 {
     public partial class CircustreinForm : Form
@@ -82,6 +84,67 @@ namespace Circustrein
                 }
             }
             else MessageBox.Show("Voeg eerst dieren toe voordat de optimale combinatie berekend kan worden.");
+        }
+
+        private void clearAnimalsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (circusTrein.GetAllAnimals().Count > 0)
+            {
+                DialogResult dialogResult =
+                    MessageBox.Show("Weet je het zeker dat je alle ingevoerde dieren wilt verwijderen?", "Some",
+                        MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    circusTrein.ClearAllAnimals();
+                    UpdateAnimalList();
+                }
+            }
+        }
+
+        private void changeWagonSizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SizeSettingsForm window = new SizeSettingsForm();
+            window.ShowDialog();
+        }
+
+        private void minimizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var output = JsonConvert.SerializeObject(circusTrein.GetAllAnimals());
+            var saveFileDialog = new SaveFileDialog
+            {
+                Filter = "Json files | .txt", DefaultExt = "json", AddExtension = true
+            };
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                using(Stream s = File.Open(saveFileDialog.FileName, FileMode.CreateNew))
+                using (StreamWriter sw = new StreamWriter(s))
+                {
+                    sw.Write(output);
+                }
+            }
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string json = "";
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                json = File.ReadAllText(openFileDialog.FileName);
+            }
+
+            circusTrein.AddAnimal(JsonConvert.DeserializeObject<List<Animal>>(json));
+            UpdateAnimalList();
         }
     }
 }

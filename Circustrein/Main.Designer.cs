@@ -42,17 +42,28 @@
             this.rdbtnMedium = new System.Windows.Forms.RadioButton();
             this.rdbtnSmall = new System.Windows.Forms.RadioButton();
             this.lstvwAnimalPairs = new System.Windows.Forms.ListView();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearAnimalsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.minimizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.grpbxAddAnimal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmrcTotal)).BeginInit();
             this.grpbxEater.SuspendLayout();
             this.grpbxAnimalSize.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lstbxAnimals
             // 
             this.lstbxAnimals.FormattingEnabled = true;
             this.lstbxAnimals.ItemHeight = 16;
-            this.lstbxAnimals.Location = new System.Drawing.Point(17, 16);
+            this.lstbxAnimals.Location = new System.Drawing.Point(13, 32);
             this.lstbxAnimals.Margin = new System.Windows.Forms.Padding(4);
             this.lstbxAnimals.Name = "lstbxAnimals";
             this.lstbxAnimals.Size = new System.Drawing.Size(288, 516);
@@ -66,7 +77,7 @@
             this.grpbxAddAnimal.Controls.Add(this.btnRemove);
             this.grpbxAddAnimal.Controls.Add(this.grpbxEater);
             this.grpbxAddAnimal.Controls.Add(this.grpbxAnimalSize);
-            this.grpbxAddAnimal.Location = new System.Drawing.Point(316, 16);
+            this.grpbxAddAnimal.Location = new System.Drawing.Point(316, 32);
             this.grpbxAddAnimal.Margin = new System.Windows.Forms.Padding(4);
             this.grpbxAddAnimal.Name = "grpbxAddAnimal";
             this.grpbxAddAnimal.Padding = new System.Windows.Forms.Padding(4);
@@ -206,21 +217,105 @@
             // lstvwAnimalPairs
             // 
             this.lstvwAnimalPairs.HideSelection = false;
-            this.lstvwAnimalPairs.Location = new System.Drawing.Point(592, 16);
+            this.lstvwAnimalPairs.Location = new System.Drawing.Point(591, 32);
             this.lstvwAnimalPairs.Margin = new System.Windows.Forms.Padding(4);
             this.lstvwAnimalPairs.Name = "lstvwAnimalPairs";
-            this.lstvwAnimalPairs.Size = new System.Drawing.Size(292, 507);
+            this.lstvwAnimalPairs.Size = new System.Drawing.Size(292, 516);
             this.lstvwAnimalPairs.TabIndex = 2;
             this.lstvwAnimalPairs.UseCompatibleStateImageBehavior = false;
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.editToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(898, 28);
+            this.menuStrip1.TabIndex = 3;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.clearAnimalsToolStripMenuItem,
+            this.openToolStripMenuItem,
+            this.saveToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.minimizeToolStripMenuItem,
+            this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // clearAnimalsToolStripMenuItem
+            // 
+            this.clearAnimalsToolStripMenuItem.Name = "clearAnimalsToolStripMenuItem";
+            this.clearAnimalsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            | System.Windows.Forms.Keys.C)));
+            this.clearAnimalsToolStripMenuItem.Size = new System.Drawing.Size(261, 26);
+            this.clearAnimalsToolStripMenuItem.Text = "Clear animals";
+            this.clearAnimalsToolStripMenuItem.Click += new System.EventHandler(this.clearAnimalsToolStripMenuItem_Click);
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(261, 26);
+            this.openToolStripMenuItem.Text = "Open";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(261, 26);
+            this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(258, 6);
+            // 
+            // minimizeToolStripMenuItem
+            // 
+            this.minimizeToolStripMenuItem.Name = "minimizeToolStripMenuItem";
+            this.minimizeToolStripMenuItem.Size = new System.Drawing.Size(261, 26);
+            this.minimizeToolStripMenuItem.Text = "Minimize";
+            this.minimizeToolStripMenuItem.Click += new System.EventHandler(this.minimizeToolStripMenuItem_Click);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(261, 26);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.changeSizeToolStripMenuItem});
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(49, 24);
+            this.editToolStripMenuItem.Text = "Edit";
+            // 
+            // changeSizeToolStripMenuItem
+            // 
+            this.changeSizeToolStripMenuItem.Name = "changeSizeToolStripMenuItem";
+            this.changeSizeToolStripMenuItem.Size = new System.Drawing.Size(197, 26);
+            this.changeSizeToolStripMenuItem.Text = "Change settings";
+            this.changeSizeToolStripMenuItem.Click += new System.EventHandler(this.changeWagonSizeToolStripMenuItem_Click);
             // 
             // CircustreinForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(891, 554);
+            this.ClientSize = new System.Drawing.Size(898, 562);
             this.Controls.Add(this.lstvwAnimalPairs);
             this.Controls.Add(this.grpbxAddAnimal);
             this.Controls.Add(this.lstbxAnimals);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "CircustreinForm";
             this.Text = "Circustrein";
@@ -230,7 +325,10 @@
             this.grpbxEater.PerformLayout();
             this.grpbxAnimalSize.ResumeLayout(false);
             this.grpbxAnimalSize.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -250,6 +348,16 @@
         private System.Windows.Forms.NumericUpDown nmrcTotal;
         private System.Windows.Forms.Button btnWagonCombination;
         private System.Windows.Forms.ListView lstvwAnimalPairs;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem clearAnimalsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem changeSizeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem minimizeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
     }
 }
 

@@ -40,9 +40,8 @@ namespace Circustrein.Models
                 {
                     while (wagon.IsWagonFull() == false && notDistributedAnimals.OrderByDescending(a => a.GetSize()).Count(a => (int)a.GetSize() > (int)wagon.GetMeatEaterSize()) != 0)
                     {
-                        var animal = notDistributedAnimals.OrderByDescending(a => a.GetSize()).Where(a => (int)a.GetSize() > (int)wagon.GetMeatEaterSize()).OrderBy(a => a.GetSize()).FirstOrDefault();
-                        if ((int)wagon.GetMeatEaterSize() < (int)animal.GetSize() &&
-                            wagon.GetPoints() + animal.GetPoints() <= 10)
+                        var animal = notDistributedAnimals.Where(a => (int)a.GetSize() > (int)wagon.GetMeatEaterSize()).OrderBy(a => a.GetSize()).FirstOrDefault();
+                        if ((int)wagon.GetMeatEaterSize() < (int)animal.GetSize() && wagon.GetPoints() + animal.GetPoints() <= Wagon.GetMaxPoints())
                         {
                             notDistributedAnimals.Remove(animal);
                             wagon.AddAnimal(animal);
@@ -50,13 +49,13 @@ namespace Circustrein.Models
                         else break;
                     }
 
-                    if (wagon.GetMeatEaterSize() == AnimalSize.Small && wagon.GetPoints() <= 7)
+                    if (wagon.GetMeatEaterSize() == AnimalSize.Small && wagon.GetPoints() <= Wagon.GetMaxPoints() - ((int)AnimalSize.Medium - (int)AnimalSize.Small))
                     {
                         var animal = notDistributedAnimals.FirstOrDefault(a => a.GetSize() == AnimalSize.Large && a.GetEater() == AnimalEater.Herbivore);
                         if (animal != null)
                         {
+                            notDistributedAnimals.Add(wagon.SwitchSmallToMediumAnimal(animal));
                             notDistributedAnimals.Remove(animal);
-                            notDistributedAnimals.Add(wagon.SwitchAnimal(animal));
                         }
                     }
                 });

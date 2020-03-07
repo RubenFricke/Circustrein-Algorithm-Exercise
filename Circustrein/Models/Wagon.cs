@@ -6,15 +6,10 @@ namespace Circustrein.Models
 {
     public class Wagon
     {
-        private const int maxPoints = 10;
+        private static int MaxPoints= 10;
 
         MeatEaterInfo meatEaterInfo = new MeatEaterInfo(); 
-        
-        //struct maken? 
-        //https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/choosing-between-class-and-struct
-        //private bool hasMeatEater = false;
-        
-        //private AnimalSize meatEaterSize;
+
         private int points = 0;
         private bool isFull = false;
         List<Animal> animals = new List<Animal>();
@@ -23,7 +18,6 @@ namespace Circustrein.Models
 
         public Wagon(Animal animal)
         {
-            //i/*nt.TryParse()*/
             AddAnimal(animal);
         }
 
@@ -38,8 +32,6 @@ namespace Circustrein.Models
             if (animal.GetEater() == AnimalEater.MeatEater)
             {
                 meatEaterInfo.SetMeatEaterSize(animal.GetSize());
-                //hasMeatEater = true;
-                //meatEaterSize = animal.GetSize();
             }
             UpdateStats();
         }
@@ -52,17 +44,13 @@ namespace Circustrein.Models
 
         private bool CheckFull()
         {
-            if (/*hasMeatEater*/meatEaterInfo.HasMeatEater())
-            {
-                if (/*GetMeatEaterSize()*/meatEaterInfo.GetMeatEaterSize() == AnimalSize.Large) return true;
-                else if (meatEaterInfo.GetMeatEaterSize() == AnimalSize.Medium && points >= maxPoints - (int)meatEaterInfo.GetMeatEaterSize()) return true;
-                else if (meatEaterInfo.GetMeatEaterSize() == AnimalSize.Small && points >= maxPoints - (int) meatEaterInfo.GetMeatEaterSize()) return true;
-            }
-            else if (points >= maxPoints) return true;
+            if (meatEaterInfo.HasMeatEater() && points >= MaxPoints - (int) meatEaterInfo.GetMeatEaterSize())
+                return true;
+            else if (points >= MaxPoints) return true;
             return false;
         }
 
-        public Animal SwitchAnimal(Animal animal)
+        public Animal SwitchSmallToMediumAnimal(Animal animal)
         {
             var anim = animals.OrderBy(a => a.GetSize()).FirstOrDefault(a => a.GetEater() == AnimalEater.Herbivore);
             animals.Remove(anim);
@@ -78,7 +66,7 @@ namespace Circustrein.Models
         
         public bool HasSpaceFor(AnimalSize size)
         {
-            return points + (int) size <= maxPoints;
+            return points + (int) size <= MaxPoints;
         }
 
         public AnimalSize GetMeatEaterSize()
@@ -95,6 +83,16 @@ namespace Circustrein.Models
         public bool IsWagonFull()
         {
             return isFull;
+        }
+
+        public static int GetMaxPoints()
+        {
+            return MaxPoints;
+        }
+
+        public static void SetMaxPoints(int points)
+        {
+            MaxPoints = points;
         }
     }
 }

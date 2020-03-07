@@ -16,15 +16,20 @@ namespace Circustrein.Models
         // dus dit krijg je vanuit alle animals uit de verdeelde wagons
         private List<Animal> animals = new List<Animal>();
 
-        public IList<Animal> GetAllAnimals()
+        public List<Animal> GetAllAnimals()
         {
             IList<Animal> list = animals.AsReadOnly(); 
-            return list;
+            return animals;
         }
 
         public void AddAnimal(Animal animal)
         {
             animals.Add(animal);
+        }
+
+        public void AddAnimal(List<Animal> animals)
+        {
+            animals.ForEach(a => this.animals.Add(a));
         }
 
         public void RemoveAnimal(Animal animal)
@@ -40,6 +45,11 @@ namespace Circustrein.Models
         public List<Wagon> GetWagons(List<Animal> animalList)
         {
             return wagonDepartment.GetBestWagonDistribution(animalList);
+        }
+
+        public void ClearAllAnimals()
+        {
+            animals.Clear();
         }
     }
 }

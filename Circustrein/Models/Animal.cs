@@ -1,13 +1,18 @@
 ﻿using Circustrein.Enums;
+using Newtonsoft.Json;
 
 namespace Circustrein.Models
 {
     public class Animal
     {
+        [JsonProperty]
         private AnimalSize size;
+        [JsonProperty]
         private AnimalEater eater;
+        [JsonProperty]
         private int points;
 
+        [JsonProperty]
         public string Name { get; private set; }
 
         public Animal(AnimalSize size, AnimalEater eater)

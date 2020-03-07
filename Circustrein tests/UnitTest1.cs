@@ -66,15 +66,15 @@ namespace Circustrein_tests
             }).Count);
         }
 
-        [Test]
-        public void AnimalPresenceCheck()
-        {
-            Assert.AreEqual(3, circusTrain.GetWagons(new List<Animal>()
-            {
-                new Animal(AnimalSize.Large, AnimalEater.MeatEater),
-                new Animal(AnimalSize.Large, AnimalEater.MeatEater),
-                new Animal(AnimalSize.Medium, AnimalEater.Herbivore),
-            });
-        }
+        //[Test]
+        //public void AnimalPresenceCheck()
+        //{
+        //    Assert.AreEqual(3, circusTrain.GetWagons(new List<Animal>()
+        //    {
+        //        new Animal(AnimalSize.Large, AnimalEater.MeatEater),
+        //        new Animal(AnimalSize.Large, AnimalEater.MeatEater),
+        //        new Animal(AnimalSize.Medium, AnimalEater.Herbivore),
+        //    });
+        //}
     }
 }
