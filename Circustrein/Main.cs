@@ -1,19 +1,24 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using Circustrein.Enums;
-using Circustrein.Models;
-using Newtonsoft.Json;
+using Circustrein.Library;
+using Circustrein.Library.Enums;
+using Circustrein.Library.Models;
+
 namespace Circustrein
 {
     public partial class CircustreinForm : Form
     {
-        private CircusTrain circusTrein;
+        private CircusTrainFiller filler;
+        private List<Animal> animals;
+
         public CircustreinForm()
         {
-            circusTrein = new CircusTrain();
+            animals = new List<Animal>();
+            filler = new CircusTrainFiller();
             InitializeComponent();
             lstbxAnimals.DisplayMember = "Name";
         }
@@ -25,14 +30,14 @@ namespace Circustrein
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
-            circusTrein.RemoveAnimal((Animal)lstbxAnimals.SelectedItem);
+            animals.Remove((Animal)lstbxAnimals.SelectedItem);
             UpdateAnimalList();
         }
 
         private void UpdateAnimalList()
         {
             lstbxAnimals.Items.Clear();
-            circusTrein.GetAllAnimals()
+            animals
                 .ToList()
                 .ForEach(x => lstbxAnimals.Items.Add(x));
         }
@@ -41,7 +46,6 @@ namespace Circustrein
         {
             AnimalSize size;
             AnimalEater eater;
-            decimal total = nmrcTotal.Value;
             if (rdbtnSmall.Checked) size = AnimalSize.Small;
             else if (rdbtnMedium.Checked) size = AnimalSize.Medium;
             else if (rdbtnLarge.Checked) size = AnimalSize.Large;
@@ -59,10 +63,9 @@ namespace Circustrein
                 return;
             }
 
-            for (int i = 0; i < total; i++)
+            for (int i = 0; i < nmrcTotal.Value; i++)
             {
-                //gegevens van het dier nog meegeven voor het object
-                circusTrein.AddAnimal(new Animal(size, eater));
+                animals.Add(new Animal(size, eater));
             }
             UpdateAnimalList();
         }
@@ -70,14 +73,13 @@ namespace Circustrein
         private void btnWagonCombination_Click(object sender, EventArgs e)
         {
             lstvwAnimalPairs.Clear();
-            if (circusTrein.GetWagons().Count > 0)
+            var wagons = filler.SortAnimalsInWagons(animals);
+            if (wagons.Count > 0)
             {
-                int total = 0;
-                foreach (var wagon in circusTrein.GetWagons())
+                for (int i = 0; i < wagons.Count; i++)
                 {
-                    total++;
-                    ListViewGroup lstvwgrp = new ListViewGroup("Wagon " + total, HorizontalAlignment.Left);
-                    wagon.GetAnimals().ToList().ForEach(animal =>
+                    ListViewGroup lstvwgrp = new ListViewGroup($"Wagon {i}", HorizontalAlignment.Left);
+                    wagons[i].GetAnimals().ToList().ForEach(animal =>
                         lstvwAnimalPairs.Items.Add(new ListViewItem(animal.Name, lstvwgrp)));
 
                     lstvwAnimalPairs.Groups.Add(lstvwgrp);
@@ -88,14 +90,14 @@ namespace Circustrein
 
         private void clearAnimalsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (circusTrein.GetAllAnimals().Count > 0)
+            if (animals.Count > 0)
             {
                 DialogResult dialogResult =
-                    MessageBox.Show("Weet je het zeker dat je alle ingevoerde dieren wilt verwijderen?", "Some",
+                    MessageBox.Show("Weet je het zeker dat je alle ingevoerde dieren wilt verwijderen?", "Alle dieren verwijderen",
                         MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    circusTrein.ClearAllAnimals();
+                    animals.Clear();
                     UpdateAnimalList();
                 }
             }
@@ -119,10 +121,10 @@ namespace Circustrein
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var output = JsonConvert.SerializeObject(circusTrein.GetAllAnimals());
+            var output = JsonConvert.SerializeObject(animals);
             var saveFileDialog = new SaveFileDialog
             {
-                Filter = "Json files | .txt", DefaultExt = "json", AddExtension = true
+                Filter = "Json files | .json", DefaultExt = "json", AddExtension = true
             };
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -136,15 +138,13 @@ namespace Circustrein
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string json = "";
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                json = File.ReadAllText(openFileDialog.FileName);
+                string json = File.ReadAllText(openFileDialog.FileName);
+                animals.AddRange((JsonConvert.DeserializeObject<List<Animal>>(json)));
+                UpdateAnimalList();
             }
-
-            circusTrein.AddAnimal(JsonConvert.DeserializeObject<List<Animal>>(json));
-            UpdateAnimalList();
         }
     }
 }

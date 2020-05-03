@@ -1,6 +1,6 @@
-﻿using Circustrein.Enums;
+﻿using Circustrein.Library.Enums;
 
-namespace Circustrein.Models
+namespace Circustrein.Library.Models
 {
     public struct MeatEaterInfo
     {

@@ -1,4 +1,4 @@
-﻿namespace Circustrein.Enums
+﻿namespace Circustrein.Library.Enums
 {
     public enum AnimalSize
     {

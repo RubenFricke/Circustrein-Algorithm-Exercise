@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
-using Circustrein.Enums;
-using Circustrein.Models;
+using Circustrein.Library.Enums;
+using Circustrein.Library.Models;
 
 namespace Circustrein
 {
@@ -10,7 +10,7 @@ namespace Circustrein
         public SizeSettingsForm()
         {
             InitializeComponent();
-            nmrcWagonSize.Value = Wagon.GetMaxPoints();
+            nmrcWagonSize.Value = Wagon.MaxPoints;
             nmrcSmallAnimalSize.Value = (int)AnimalSize.Small;
             nmrcMediumAnimalSize.Value = (int)AnimalSize.Medium;
             nmrcLargeAnimalSize.Value = (int)AnimalSize.Large;
