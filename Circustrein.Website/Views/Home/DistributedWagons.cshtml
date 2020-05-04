@@ -1,0 +1,60 @@
+﻿@model Circustrein.Website.ViewModels.HomeDistributeViewModel
+
+@{
+    ViewData["Title"] = "DistributedWagons";
+}
+
+
+<form asp-action="DistributedWagons">
+
+    <label asp-for="@Model.Setup.TotalLargeMeateaters"></label>
+    <input asp-for="@Model.Setup.TotalLargeMeateaters" />
+    <span asp-validation-for="@Model.Setup.TotalLargeMeateaters"></span>
+    <hr />
+
+    <label asp-for="@Model.Setup.TotalMediumMeateaters"></label>
+    <input asp-for="@Model.Setup.TotalMediumMeateaters" />
+    <span asp-validation-for="@Model.Setup.TotalMediumMeateaters"></span>
+    <hr />
+
+    <label asp-for="@Model.Setup.TotalSmallMeateaters"></label>
+    <input asp-for="@Model.Setup.TotalSmallMeateaters" />
+    <span asp-validation-for="@Model.Setup.TotalSmallMeateaters"></span>
+    <hr />
+
+    <label asp-for="@Model.Setup.TotalLargeHerbivores"></label>
+    <input asp-for="@Model.Setup.TotalLargeHerbivores" />
+    <span asp-validation-for="@Model.Setup.TotalLargeHerbivores"></span>
+    <hr />
+
+    <label asp-for="@Model.Setup.TotalMediumHerbivores"></label>
+    <input asp-for="@Model.Setup.TotalMediumHerbivores" />
+    <span asp-validation-for="@Model.Setup.TotalMediumHerbivores"></span>
+    <hr />
+
+    <label asp-for="@Model.Setup.TotalSmallHerbivores"></label>
+    <input asp-for="@Model.Setup.TotalSmallHerbivores" />
+    <span asp-validation-for="@Model.Setup.TotalSmallHerbivores"></span>
+    <hr />
+    <input type="submit" value="Bereken" />
+</form>
+
+@if (Model != null)
+{
+    <h1>Output</h1>
+
+    <p>
+        @for (int i = 1; i <= Model.Wagons.Count(); i++)
+        {
+            var wagon = Model.Wagons[i - 1].GetAnimals();
+            <h1>Wagon @i</h1>
+            <ul>
+                @foreach (var animal in wagon)
+                {
+                    <li>@animal.Name</li>
+                }
+            </ul>
+            <hr />
+        }
+    </p>
+}

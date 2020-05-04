@@ -15,7 +15,7 @@ namespace Circustrein.Library.Models
 
         public bool IsFull { get; private set; }
 
-        List<Animal> animals = new List<Animal>();
+        private List<Animal> animals = new List<Animal>();
 
         public void AddAnimal(Animal animal)
         {
